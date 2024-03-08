@@ -1,12 +1,18 @@
 package com.ynov.games.model;
 
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -39,10 +45,34 @@ public class Game {
 	@Column(name = "nb_gamer")
 	private Integer nb_gamer;
 	
+	//@Column(name = "id_illustrator")
+	//private Integer id_illustrator;
+	
+	@OneToMany(
+			cascade = CascadeType.ALL,
+			fetch = FetchType.EAGER,
+			orphanRemoval = true
+			)
+	@JoinColumn(name = "id_illustrator")
+	
+	private List<Illustrator> illustrator = new ArrayList<>();
+	
+	//@Column(name = "id_creator")
+	//private Integer id_creator;
+	
+	@OneToMany(
+			cascade = CascadeType.ALL,
+			fetch = FetchType.EAGER,
+			orphanRemoval = true
+			)
+	@JoinColumn(name = "id_creator")
+	
+	private List<Creator> creator = new ArrayList<>();
+	
 	
 	// Getters and setters	
-
 	
+
 	public Integer getId_game() {
 		return id_game;
 	}
@@ -106,7 +136,21 @@ public class Game {
 	public void setNb_gamer(Integer nb_gamer) {
 		this.nb_gamer = nb_gamer;
 	}
-	
-	
-	
+
+	public List<Illustrator> getIllustrator() {
+		return illustrator;
+	}
+
+	public void setIllustrator(List<Illustrator> illustrator) {
+		this.illustrator = illustrator;
+	}
+
+	public List<Creator> getCreator() {
+		return creator;
+	}
+
+	public void setCreator(List<Creator> creator) {
+		this.creator = creator;
+	}
+			
 }
