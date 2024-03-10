@@ -21,8 +21,10 @@ public class IllustratorController {
 	private IllustratorService illustratorService;
 	
 	@GetMapping("/illustrators")
-	public Iterable<Illustrator> getIllustrators(){
-		return illustratorService.getIllustrators();
+	public ResponseEntity<Iterable<Illustrator>> getIllustrators() {
+	    Iterable<Illustrator> illustrators = illustratorService.getIllustrators();
+	    
+	    return ResponseEntity.status(HttpStatus.OK).body(illustrators);
 	}
 	
 	@GetMapping("/illustrator/{id}")

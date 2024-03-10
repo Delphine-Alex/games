@@ -25,16 +25,18 @@ public class GameController {
 	private GameService gameService;
 	
 	@GetMapping("/games")
-	public Iterable<Game> getGames(){
-		return gameService.getGames();
+	public ResponseEntity<Iterable<Game>> getGames() {
+		Iterable<Game> games = gameService.getGames();
+		    
+		return ResponseEntity.status(HttpStatus.OK).body(games);
 	}
 	
 	@GetMapping("/game/{id}")
 	public ResponseEntity<Game> getGame(@PathVariable("id") Integer id) {
-			Optional<Game> p = gameService.getGame(id);
+		Optional<Game> p = gameService.getGame(id);
+		
 			if(p.isPresent()) {
 				return new ResponseEntity<Game>(p.get(), HttpStatus.OK);
-				
 			}
 			
 			return new ResponseEntity<Game>(HttpStatus.NOT_FOUND);
@@ -52,8 +54,10 @@ public class GameController {
 	//}
 	
 	@DeleteMapping("/game/{id}")
-	public void deleteGame(@PathVariable("id") Integer id) {
-		 gameService.deleteGame(id);
+	public ResponseEntity<Game> delateGame(@PathVariable("id") Integer id) {
+	    gameService.deleteGame(id);
+	    
+	    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
 	

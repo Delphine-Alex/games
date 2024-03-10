@@ -21,8 +21,10 @@ public class CreatorController {
 	private CreatorService creatorService;
 	
 	@GetMapping("/creators")
-	public Iterable<Creator> getCreators(){
-		return creatorService.getCreators();
+	public ResponseEntity<Iterable<Creator>> getCreators() {
+	    Iterable<Creator> creators = creatorService.getCreators();
+	    
+	    return ResponseEntity.status(HttpStatus.OK).body(creators);
 	}
 
 	@GetMapping("/creator/{id}")
