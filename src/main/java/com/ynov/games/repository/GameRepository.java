@@ -8,5 +8,7 @@ import com.ynov.games.model.Game;
 
 @Repository
 public interface GameRepository extends CrudRepository<Game, Integer> {
+	
+	Iterable<Game> findByAgeGreaterThanEqual(Integer minAge);
 
 }

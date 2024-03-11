@@ -22,6 +22,10 @@ public class GameService {
 		return gameRepository.findById(id);
 	}
 	
+	public Iterable<Game> getGamesByAgeGreaterThanEqual(Integer minAge) {
+        return gameRepository.findByAgeGreaterThanEqual(minAge);
+    }
+	
 	//public Game upsert(Game game) {
 	//	return gameRepository.save(game);
 	//}
