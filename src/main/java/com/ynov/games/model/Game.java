@@ -77,7 +77,7 @@ public class Game {
 	    joinColumns = { @JoinColumn(name = "id_game") },
 	    inverseJoinColumns = { @JoinColumn(name = "id_mechanism") }
 	)
-	private List<Mecanism> mechanisms = new ArrayList<>();
+	private List<Mechanism> mechanisms = new ArrayList<>();
 	
 	
 	// Getters and setters	
@@ -179,22 +179,22 @@ public class Game {
 		this.creators = creators;
 	}
 
-	public List<Mecanism> getMechanisms() {
+	public List<Mechanism> getMechanisms() {
 		return mechanisms;
 	}
 
-	public void setMechanisms(List<Mecanism> mechanisms) {
+	public void setMechanisms(List<Mechanism> mechanisms) {
 		this.mechanisms = mechanisms;
 	}
 	
 	
 	
-	public void addMechanism(Mecanism mechanism) {
+	public void addMechanism(Mechanism mechanism) {
 	    mechanisms.add(mechanism);
 	    mechanism.getGames().add(this);
 	}
 
-	public void removeMechanism(Mecanism mechanism) {
+	public void removeMechanism(Mechanism mechanism) {
 	    mechanisms.remove(mechanism);
 	    mechanism.getGames().remove(this);
 	}

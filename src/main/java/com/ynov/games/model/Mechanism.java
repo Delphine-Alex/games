@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "mechanisms")
-public class Mecanism {
+public class Mechanism {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
