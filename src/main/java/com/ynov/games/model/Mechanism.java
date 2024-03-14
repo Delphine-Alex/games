@@ -1,7 +1,7 @@
 package com.ynov.games.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,7 +27,7 @@ public class Mechanism {
 	
 	@ManyToMany(mappedBy = "mechanisms")
 	@JsonIgnore
-	private List<Game> games = new ArrayList<>();
+	private Set<Game> games = new HashSet<>();
 
 	
 	// Getters and setters	
@@ -49,15 +49,6 @@ public class Mechanism {
 		this.name = name;
 	}
 
-	public List<Game> getGames() {
-		return games;
-	}
-
-	public void setGames(List<Game> games) {
-		this.games = games;
-	}
-	
-	
-	
+		
 
 }

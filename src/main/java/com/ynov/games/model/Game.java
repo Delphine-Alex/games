@@ -2,7 +2,9 @@ package com.ynov.games.model;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -77,7 +79,23 @@ public class Game {
 	    joinColumns = { @JoinColumn(name = "id_game") },
 	    inverseJoinColumns = { @JoinColumn(name = "id_mechanism") }
 	)
-	private List<Mechanism> mechanisms = new ArrayList<>();
+	private Set<Mechanism> mechanisms = new HashSet<>();
+	
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(
+	    name = "version",
+	    joinColumns = { @JoinColumn(name = "id_game") },
+	    inverseJoinColumns = { @JoinColumn(name = "id_editor") }
+	)
+	private Set<Editor> editors = new HashSet<>();
+	
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(
+	    name = "version",
+	    joinColumns = { @JoinColumn(name = "id_game") },
+	    inverseJoinColumns = { @JoinColumn(name = "id_langage") }
+	)
+	private Set<Langage> langages = new HashSet<>();
 	
 	
 	// Getters and setters	
@@ -179,24 +197,30 @@ public class Game {
 		this.creators = creators;
 	}
 
-	public List<Mechanism> getMechanisms() {
+	public Set<Mechanism> getMechanisms() {
 		return mechanisms;
 	}
 
-	public void setMechanisms(List<Mechanism> mechanisms) {
+	public void setMechanisms(Set<Mechanism> mechanisms) {
 		this.mechanisms = mechanisms;
 	}
-	
-	
-	
-	public void addMechanism(Mechanism mechanism) {
-	    mechanisms.add(mechanism);
-	    mechanism.getGames().add(this);
+
+	public Set<Editor> getEditors() {
+		return editors;
 	}
 
-	public void removeMechanism(Mechanism mechanism) {
-	    mechanisms.remove(mechanism);
-	    mechanism.getGames().remove(this);
+	public void setEditors(Set<Editor> editors) {
+		this.editors = editors;
 	}
+
+	public Set<Langage> getLangages() {
+		return langages;
+	}
+
+	public void setLangages(Set<Langage> langages) {
+		this.langages = langages;
+	}
+	
+
 				
 }

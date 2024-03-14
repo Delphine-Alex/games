@@ -26,6 +26,10 @@ public class GameService {
         return gameRepository.findByAgeGreaterThanEqual(minAge);
     }
 	
+	public Iterable<Game> getGamesByCreator(String creatorName) {
+        return gameRepository.findByCreatorName(creatorName);
+    }
+	
 	//public Game upsert(Game game) {
 	//	return gameRepository.save(game);
 	//}

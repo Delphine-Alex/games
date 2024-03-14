@@ -26,12 +26,13 @@ public class GameController {
 	private GameService gameService;
 	
 	@GetMapping("/games")
-	public ResponseEntity<Iterable<Game>> getGames(@RequestParam(required = false) Integer min_age) {
+	public ResponseEntity<Iterable<Game>> getGames(@RequestParam(required = false) Integer min_age, @RequestParam(required = false) String creator) {
 		Iterable<Game> games;
-		if (min_age != null) {
+		if (creator != null) {
+            games = gameService.getGamesByCreator(creator);
+        } else if (min_age != null) {
             games = gameService.getGamesByAgeGreaterThanEqual(min_age);
         } else {
-           
             games = gameService.getGames();
         }
         return ResponseEntity.status(HttpStatus.OK).body(games);
