@@ -30,9 +30,9 @@ public class GameService {
 //        return gameRepository.findByCreatorName(creatorName);
 //    }
 	
-	//public Game upsert(Game game) {
-	//	return gameRepository.save(game);
-	//}
+	public Game upsert(Game game) {
+		return gameRepository.save(game);
+	}
 	
 	public void deleteGame(Integer id){
 		gameRepository.deleteById(id);
