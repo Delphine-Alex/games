@@ -56,13 +56,24 @@ public class GameController {
 	
 	
 	@PostMapping("/games")
-	public Game addGame(@RequestBody Game game) {
-		return gameService.upsert(game);
+	public ResponseEntity<Game> createGame(@RequestBody Game game) {
+		Game createGame = gameService.upsert(game);
+	    return ResponseEntity.status(HttpStatus.CREATED).body(createGame);
 	}
 
+	
 	@PutMapping("/game/{id}")
-	public Game Game(@RequestBody Game game) {
-		return gameService.upsert(game);
+	public ResponseEntity<Game> updateGame(@PathVariable("id") Integer id, @RequestBody Game game) {
+		
+	    Optional<Game> existingGame = gameService.getGame(id);
+	    if (existingGame.isEmpty()) {
+	        return ResponseEntity.notFound().build();
+	    }
+	    
+	    game.setId_game(id);
+	    Game updatedGame = gameService.upsert(game);
+	    
+	    return ResponseEntity.status(HttpStatus.OK).body(updatedGame);
 	}
 	
 	@DeleteMapping("/game/{id}")
