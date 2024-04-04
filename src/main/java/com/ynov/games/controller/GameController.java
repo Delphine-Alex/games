@@ -71,9 +71,9 @@ public class GameController {
 	    }
 	    
 	    game.setId_game(id);
-	    Game updatedGame = gameService.upsert(game);
+	    Game updateGame = gameService.upsert(game);
 	    
-	    return ResponseEntity.status(HttpStatus.OK).body(updatedGame);
+	    return ResponseEntity.status(HttpStatus.OK).body(updateGame);
 	}
 	
 	@DeleteMapping("/game/{id}")

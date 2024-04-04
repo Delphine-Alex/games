@@ -5,8 +5,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,6 +40,33 @@ public class CreatorController {
 			}
 			
 			return new ResponseEntity<Creator>(HttpStatus.NOT_FOUND);
+	}
+	
+	@PostMapping("/creators")
+	public ResponseEntity<Creator> createCreator(@RequestBody Creator creator) {
+		Creator createCreator = creatorService.upsert(creator);
+	    return ResponseEntity.status(HttpStatus.CREATED).body(createCreator);
+	}
+	
+	@PutMapping("/creator/{id}")
+	public ResponseEntity<Creator> updateCreator(@PathVariable("id") Integer id, @RequestBody Creator creator) {
+		
+	    Optional<Creator> existingCreator = creatorService.getCreator(id);
+	    if (existingCreator.isEmpty()) {
+	        return ResponseEntity.notFound().build();
+	    }
+	    
+	    creator.setId_creator(id);
+	    Creator updateCreator = creatorService.upsert(creator);
+	    
+	    return ResponseEntity.status(HttpStatus.OK).body(updateCreator);
+	}
+	
+	@DeleteMapping("/creator/{id}")
+	public ResponseEntity<Creator> delateCreator(@PathVariable("id") Integer id) {
+	    creatorService.deleteCreator(id);
+	    
+	    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 
 }

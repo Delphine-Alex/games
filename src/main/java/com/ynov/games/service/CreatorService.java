@@ -21,5 +21,13 @@ public class CreatorService {
 	public Optional<Creator> getCreator(Integer id) {
 		return creatorRepository.findById(id);
 	}
+	
+	public Creator upsert(Creator creator) {
+		return creatorRepository.save(creator);
+	}
+	
+	public void deleteCreator(Integer id){
+		creatorRepository.deleteById(id);
+	}
 
 }

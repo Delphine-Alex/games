@@ -22,4 +22,12 @@ public class IllustratorService {
 		return illustratorRepository.findById(id);
 	}
 	
+	public Illustrator upsert(Illustrator illustrator) {
+		return illustratorRepository.save(illustrator);
+	}
+	
+	public void deleteIllustrator(Integer id){
+		illustratorRepository.deleteById(id);
+	}
+	
 }
