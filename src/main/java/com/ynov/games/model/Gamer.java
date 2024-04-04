@@ -22,16 +22,16 @@ public class Gamer {
 	@Column(name = "firstname")
 	private String firstname;
 	
-	@Column(name = "name")
-	private String name;
+	@Column(name = "lastname")
+	private String lastname;
 	
 	@Column(name = "id_langage")
 	private Integer id_langage;
 	
 	
 	// Getters and setters
-	
 
+	
 	public Integer getId_gamer() {
 		return id_gamer;
 	}
@@ -56,12 +56,12 @@ public class Gamer {
 		this.firstname = firstname;
 	}
 
-	public String getName() {
-		return name;
+	public String getLastname() {
+		return lastname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public Integer getId_langage() {
@@ -72,6 +72,6 @@ public class Gamer {
 		this.id_langage = id_langage;
 	}
 	
-
+	
 
 }

@@ -22,4 +22,38 @@ public class Forum {
 	@Column(name = "id_langage")
 	private Integer id_langage;
 	
+	
+	// Getters and setters	
+
+
+	public Integer getId_forum() {
+		return id_forum;
+	}
+
+
+	public void setId_forum(Integer id_forum) {
+		this.id_forum = id_forum;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public Integer getId_langage() {
+		return id_langage;
+	}
+
+
+	public void setId_langage(Integer id_langage) {
+		this.id_langage = id_langage;
+	}
+		
+	
 }

@@ -16,7 +16,6 @@ public class MechanismService {
 	
 	public Iterable<Mechanism> getMechanisms(){
 		return mechanismRepository.findAll();
-		
 	}
 	
 	public Optional<Mechanism> getMechanism(Integer id) {

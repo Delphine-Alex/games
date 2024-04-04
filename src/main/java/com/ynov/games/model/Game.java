@@ -52,26 +52,9 @@ public class Game {
 	@Column(name = "id_illustrator")
 	private Integer id_illustrator;
 	
-	@OneToMany(
-			cascade = CascadeType.ALL,
-			fetch = FetchType.EAGER,
-			orphanRemoval = true
-			)
-	@JoinColumn(name = "id_illustrator")
-	
-	private List<Illustrator> illustrators = new ArrayList<>();
-	
 	@Column(name = "id_creator")
 	private Integer id_creator;
 	
-	@OneToMany(
-			cascade = CascadeType.ALL,
-			fetch = FetchType.EAGER,
-			orphanRemoval = true
-			)
-	@JoinColumn(name = "id_creator")
-	
-	private List<Creator> creators = new ArrayList<>();
 	
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(
@@ -81,6 +64,7 @@ public class Game {
 	)
 	private Set<Mechanism> mechanisms = new HashSet<>();
 	
+	
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(
 	    name = "version",
@@ -89,6 +73,7 @@ public class Game {
 	)
 	private Set<Editor> editors = new HashSet<>();
 	
+	
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(
 	    name = "version",
@@ -96,6 +81,15 @@ public class Game {
 	    inverseJoinColumns = { @JoinColumn(name = "id_langage") }
 	)
 	private Set<Langage> langages = new HashSet<>();
+	
+	@OneToMany(
+			cascade = CascadeType.ALL,
+			fetch = FetchType.EAGER,
+			orphanRemoval = true
+			)
+	@JoinColumn(name = "id_game")
+	
+	private List<Tournament> tournaments = new ArrayList<>();
 	
 	
 	// Getters and setters	
@@ -173,28 +167,12 @@ public class Game {
 		this.id_illustrator = id_illustrator;
 	}
 
-	public List<Illustrator> getIllustrators() {
-		return illustrators;
-	}
-
-	public void setIllustrators(List<Illustrator> illustrators) {
-		this.illustrators = illustrators;
-	}
-
 	public Integer getId_creator() {
 		return id_creator;
 	}
 
 	public void setId_creator(Integer id_creator) {
 		this.id_creator = id_creator;
-	}
-
-	public List<Creator> getCreators() {
-		return creators;
-	}
-
-	public void setCreators(List<Creator> creators) {
-		this.creators = creators;
 	}
 
 	public Set<Mechanism> getMechanisms() {
@@ -220,6 +198,15 @@ public class Game {
 	public void setLangages(Set<Langage> langages) {
 		this.langages = langages;
 	}
+
+	public List<Tournament> getTournaments() {
+		return tournaments;
+	}
+
+	public void setTournaments(List<Tournament> tournaments) {
+		this.tournaments = tournaments;
+	}
+	
 	
 
 				

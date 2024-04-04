@@ -16,7 +16,6 @@ public class IllustratorService {
 	
 	public Iterable<Illustrator> getIllustrators(){
 		return illustratorRepository.findAll();
-		
 	}
 	
 	public Optional<Illustrator> getIllustrator(Integer id) {

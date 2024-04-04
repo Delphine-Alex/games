@@ -22,13 +22,13 @@ public class GameService {
 		return gameRepository.findById(id);
 	}
 	
-	public Iterable<Game> getGamesByAgeGreaterThanEqual(Integer minAge) {
-        return gameRepository.findByAgeGreaterThanEqual(minAge);
-    }
-	
-	public Iterable<Game> getGamesByCreator(String creatorName) {
-        return gameRepository.findByCreatorName(creatorName);
-    }
+//	public Iterable<Game> getGamesByAgeGreaterThanEqual(Integer minAge) {
+//        return gameRepository.findByAgeGreaterThanEqual(minAge);
+//    }
+//	
+//	public Iterable<Game> getGamesByCreator(String creatorName) {
+//        return gameRepository.findByCreatorName(creatorName);
+//    }
 	
 	//public Game upsert(Game game) {
 	//	return gameRepository.save(game);
