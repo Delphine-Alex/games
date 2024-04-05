@@ -21,8 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ynov.games.model.Illustrator;
 import com.ynov.games.service.IllustratorService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/v1")
+@Tag(name = "Illustrator", description = "Illustrator Controller APIs")
 public class IllustratorController {
 	
 	@Autowired

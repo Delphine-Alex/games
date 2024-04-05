@@ -21,8 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ynov.games.model.Creator;
 import com.ynov.games.service.CreatorService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/v1")
+@Tag(name = "Creator", description = "Creator Controller APIs")
 public class CreatorController {
 	
 	@Autowired

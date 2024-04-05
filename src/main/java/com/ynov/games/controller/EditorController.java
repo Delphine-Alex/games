@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ynov.games.model.Editor;
 import com.ynov.games.service.EditorService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/v1")
+@Tag(name = "Editor", description = "Editor Controller APIs")
 public class EditorController {
 	
 	@Autowired

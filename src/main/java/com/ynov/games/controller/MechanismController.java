@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ynov.games.model.Mechanism;
 import com.ynov.games.service.MechanismService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/v1")
+@Tag(name = "Mechanism", description = "Mechanism Controller APIs")
 public class MechanismController {
 	
 	@Autowired
