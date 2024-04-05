@@ -16,10 +16,6 @@ public class GameService {
 	@Autowired
 	private GameRepository gameRepository;
 	
-	//public Iterable<Game> getGames(){
-	//	return gameRepository.findAll();
-	//}
-	
 	public Page<Game> getGames(Pageable pageable, String name) {
         if (name != null) {
             return gameRepository.findAllByName(pageable, name);
@@ -31,14 +27,6 @@ public class GameService {
 	public Optional<Game> getGame(Integer id) {
 		return gameRepository.findById(id);
 	}
-	
-//	public Iterable<Game> getGamesByAgeGreaterThanEqual(Integer minAge) {
-//        return gameRepository.findByAgeGreaterThanEqual(minAge);
-//    }
-//	
-//	public Iterable<Game> getGamesByCreator(String creatorName) {
-//        return gameRepository.findByCreatorName(creatorName);
-//    }
 	
 	public Game upsert(Game game) {
 		return gameRepository.save(game);
