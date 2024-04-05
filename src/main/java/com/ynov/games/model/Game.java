@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -56,12 +58,16 @@ public class Game {
 	private Integer id_creator;
 	
 	
-	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(
-	    name = "gamemechanism",
-	    joinColumns = { @JoinColumn(name = "id_game") },
-	    inverseJoinColumns = { @JoinColumn(name = "id_mechanism") }
-	)
+//	@ManyToMany(cascade = { CascadeType.ALL })
+//	@JoinTable(
+//	    name = "gamemechanism",
+//	    joinColumns = { @JoinColumn(name = "id_game") },
+//	    inverseJoinColumns = { @JoinColumn(name = "id_mechanism") }
+//	)
+//	private Set<Mechanism> mechanisms = new HashSet<>();
+	
+	@ManyToMany(mappedBy = "games")
+	@JsonIgnore
 	private Set<Mechanism> mechanisms = new HashSet<>();
 	
 	
@@ -175,16 +181,26 @@ public class Game {
 		this.id_creator = id_creator;
 	}
 
+//	public Set<Mechanism> getMechanisms() {
+//		return mechanisms;
+//	}
+//
+//	public void setMechanisms(Set<Mechanism> mechanisms) {
+//		this.mechanisms = mechanisms;
+//	}
+	
+	
+
+	public Set<Editor> getEditors() {
+		return editors;
+	}
+
 	public Set<Mechanism> getMechanisms() {
 		return mechanisms;
 	}
 
 	public void setMechanisms(Set<Mechanism> mechanisms) {
 		this.mechanisms = mechanisms;
-	}
-
-	public Set<Editor> getEditors() {
-		return editors;
 	}
 
 	public void setEditors(Set<Editor> editors) {

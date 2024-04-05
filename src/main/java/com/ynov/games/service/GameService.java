@@ -3,6 +3,8 @@ package com.ynov.games.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ynov.games.model.Game;
@@ -14,8 +16,16 @@ public class GameService {
 	@Autowired
 	private GameRepository gameRepository;
 	
-	public Iterable<Game> getGames(){
-		return gameRepository.findAll();
+	//public Iterable<Game> getGames(){
+	//	return gameRepository.findAll();
+	//}
+	
+//	public Page<Game> getGames(Pageable pageable, String name, Integer age, Integer price) {
+//	    return gameRepository.findPaginationGames(pageable, name, age, price) ;
+//	}
+	
+	public Page<Game> getGames(Pageable pageable, String name) {
+	    return gameRepository.findAllByName(pageable, name);
 	}
 	
 	public Optional<Game> getGame(Integer id) {
