@@ -15,7 +15,8 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
 //	@Query("SELECT g FROM Game g JOIN g.creators c WHERE c.name = :creatorName")
 //	public Iterable<Game> findByCreatorName(@Param("creatorName") String creatorName);
 	
-	//Page<Game> findPaginationGames(Pageable pageable, String name, Integer age, Integer price);
 	Page<Game> findAllByName(Pageable pageable, String name);
+	
+	Page<Game> findAll(Pageable pageable);
 
 }

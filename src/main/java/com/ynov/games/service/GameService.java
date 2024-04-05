@@ -20,13 +20,13 @@ public class GameService {
 	//	return gameRepository.findAll();
 	//}
 	
-//	public Page<Game> getGames(Pageable pageable, String name, Integer age, Integer price) {
-//	    return gameRepository.findPaginationGames(pageable, name, age, price) ;
-//	}
-	
 	public Page<Game> getGames(Pageable pageable, String name) {
-	    return gameRepository.findAllByName(pageable, name);
-	}
+        if (name != null) {
+            return gameRepository.findAllByName(pageable, name);
+        } else {
+            return gameRepository.findAll(pageable);
+        }
+    }
 	
 	public Optional<Game> getGame(Integer id) {
 		return gameRepository.findById(id);

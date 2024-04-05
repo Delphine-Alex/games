@@ -29,30 +29,19 @@ public class GameController {
 	private GameService gameService;
 	
 	@GetMapping("/games")
-//	public ResponseEntity<Iterable<Game>> getGames(@RequestParam(required = false) Integer min_age, @RequestParam(required = false) String creator) {
-//		Iterable<Game> games;
-//		if (creator != null) {
-//            games = gameService.getGamesByCreator(creator);
-//        } else if (min_age != null) {
-//            games = gameService.getGamesByAgeGreaterThanEqual(min_age);
-//        } else {
-//            games = gameService.getGames();
-//        }
-//        return ResponseEntity.status(HttpStatus.OK).body(games);
-	//public Iterable<Game> getGames(){
-	//	return gameService.getGames();
-	//}
-	public Page<Game> getGames(
+    public ResponseEntity<Page<Game>> getGames(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int pageSize,
             @RequestParam(required = false) String name
-//            @RequestParam(required = false) Integer age,
-//            @RequestParam(required = false) Integer price
     ) {
-        
         Pageable pageable = PageRequest.of(page, pageSize);
-  
-        return gameService.getGames(pageable, name);
+        Page<Game> gamesPage = gameService.getGames(pageable, name);
+        
+        if (gamesPage.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(gamesPage, HttpStatus.OK);
+        }
     }
 	
 	@GetMapping("/game/{id}")

@@ -40,24 +40,6 @@ public class Langage {
 	
 	private List<Forum> forums = new ArrayList<>();
 	
-	@OneToMany(
-			cascade = CascadeType.ALL,
-			fetch = FetchType.EAGER,
-			orphanRemoval = true
-			)
-	@JoinColumn(name = "id_langage")
-	
-	private List<Gamer> gamers = new ArrayList<>();
-	
-	@OneToMany(
-			cascade = CascadeType.ALL,
-			fetch = FetchType.EAGER,
-			orphanRemoval = true
-			)
-	@JoinColumn(name = "id_langage")
-	
-	private List<Tournament> tournaments = new ArrayList<>();
-	
 	@ManyToMany(mappedBy = "langages")
 	@JsonIgnore
 	private Set<Game> games = new HashSet<>();
@@ -88,22 +70,6 @@ public class Langage {
 
 	public void setForums(List<Forum> forums) {
 		this.forums = forums;
-	}
-
-	public List<Gamer> getGamers() {
-		return gamers;
-	}
-
-	public void setGamers(List<Gamer> gamers) {
-		this.gamers = gamers;
-	}
-
-	public List<Tournament> getTournaments() {
-		return tournaments;
-	}
-
-	public void setTournaments(List<Tournament> tournaments) {
-		this.tournaments = tournaments;
 	}
 
 	public Set<Game> getGames() {

@@ -1,9 +1,7 @@
 package com.ynov.games.model;
 
 import java.sql.Time;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,14 +9,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -87,15 +83,6 @@ public class Game {
 	    inverseJoinColumns = { @JoinColumn(name = "id_langage") }
 	)
 	private Set<Langage> langages = new HashSet<>();
-	
-	@OneToMany(
-			cascade = CascadeType.ALL,
-			fetch = FetchType.EAGER,
-			orphanRemoval = true
-			)
-	@JoinColumn(name = "id_game")
-	
-	private List<Tournament> tournaments = new ArrayList<>();
 	
 	
 	// Getters and setters	
@@ -190,7 +177,6 @@ public class Game {
 //	}
 	
 	
-
 	public Set<Editor> getEditors() {
 		return editors;
 	}
@@ -214,16 +200,6 @@ public class Game {
 	public void setLangages(Set<Langage> langages) {
 		this.langages = langages;
 	}
-
-	public List<Tournament> getTournaments() {
-		return tournaments;
-	}
-
-	public void setTournaments(List<Tournament> tournaments) {
-		this.tournaments = tournaments;
-	}
-	
-	
 
 				
 }
