@@ -29,7 +29,7 @@ public class IllustratorController {
 	private IllustratorService illustratorService;
 	
 	@GetMapping("/illustrators")
-	public ResponseEntity<Page<Illustrator>> getillustrators(
+	public ResponseEntity<Page<Illustrator>> getIllustrators(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int pageSize,
             @RequestParam(required = false) String name

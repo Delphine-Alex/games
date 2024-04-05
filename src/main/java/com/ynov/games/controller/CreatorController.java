@@ -3,6 +3,9 @@ package com.ynov.games.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ynov.games.model.Creator;
@@ -25,11 +29,20 @@ public class CreatorController {
 	private CreatorService creatorService;
 	
 	@GetMapping("/creators")
-	public ResponseEntity<Iterable<Creator>> getCreators() {
-	    Iterable<Creator> creators = creatorService.getCreators();
-	    
-	    return ResponseEntity.status(HttpStatus.OK).body(creators);
-	}
+	public ResponseEntity<Page<Creator>> getCreators(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int pageSize,
+            @RequestParam(required = false) String name
+    ) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<Creator> creatorsPage = creatorService.getCreators(pageable, name);
+        
+        if (creatorsPage.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(creatorsPage, HttpStatus.OK);
+        }
+    }
 
 	@GetMapping("/creator/{id}")
 	public ResponseEntity<Creator> getCreator(@PathVariable("id") Integer id) {
