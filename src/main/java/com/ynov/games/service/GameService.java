@@ -16,13 +16,15 @@ public class GameService {
 	@Autowired
 	private GameRepository gameRepository;
 	
-	public Page<Game> getGames(Pageable pageable, String name, Integer minAge, String illustratorName) {
+	public Page<Game> getGames(Pageable pageable, String name, Integer minAge, String illustratorName, String creatorName) {
         if (name != null && minAge != null) {
-          return gameRepository.findAllByNameAndAgeGreaterThanEqualAndIllustratorName(pageable, name, minAge, illustratorName);
+          return gameRepository.findAllByNameAndAgeGreaterThanEqualAndIllustratorNameAndCreatorName(pageable, name, minAge, illustratorName, creatorName);
         } else if (illustratorName != null) {
         	return gameRepository.findAllByIllustratorName(pageable, illustratorName);
         } else if (minAge != null) {
         	return gameRepository.findAllByAgeGreaterThanEqual(pageable, minAge);
+        } else if (creatorName != null) {
+        	return gameRepository.findAllByCreatorName(pageable, creatorName);
         } else if (name != null) {
             return gameRepository.findAllByName(pageable, name);
         } else {

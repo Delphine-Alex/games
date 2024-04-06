@@ -50,8 +50,9 @@ public class Game {
     @JoinColumn(name = "id_illustrator")
     private Illustrator illustrator;
 	
-	@Column(name = "id_creator")
-	private Integer id_creator;
+	@ManyToOne
+    @JoinColumn(name = "id_creator")
+    private Creator creator;
 	
 	
 	@ManyToMany(cascade = { CascadeType.ALL })
@@ -174,13 +175,13 @@ public class Game {
 	}
 
 
-	public Integer getId_creator() {
-		return id_creator;
+	public Creator getCreator() {
+		return creator;
 	}
 
 
-	public void setId_creator(Integer id_creator) {
-		this.id_creator = id_creator;
+	public void setCreator(Creator creator) {
+		this.creator = creator;
 	}
 
 
