@@ -1,5 +1,6 @@
 package com.ynov.games.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,11 +41,13 @@ public class GameController {
             @RequestParam(required = false) String illustratorName,
             @RequestParam(required = false) String creatorName,
             @RequestParam(required = false) Integer minPrice,
-            @RequestParam(required = false) Integer maxPrice
+            @RequestParam(required = false) Integer maxPrice,
+            @RequestParam(required = false) List<Integer> nbGamerList
             
     ) {
+		
         Pageable pageable = PageRequest.of(page, pageSize);
-        Page<Game> gamesPage = gameService.getGames(pageable, name, minAge, illustratorName, creatorName, minPrice, maxPrice);
+        Page<Game> gamesPage = gameService.getGames(pageable, name, minAge, illustratorName, creatorName, minPrice, maxPrice, nbGamerList);
         
         if (gamesPage.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

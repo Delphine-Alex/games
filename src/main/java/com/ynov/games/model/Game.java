@@ -44,7 +44,7 @@ public class Game {
 	private String description;
 	
 	@Column(name = "nb_gamer")
-	private Integer nb_gamer;
+	private Integer nbGamer;
 	
 	@ManyToOne
     @JoinColumn(name = "id_illustrator")
@@ -81,10 +81,10 @@ public class Game {
 	)
 	private Set<Langage> langages = new HashSet<>();
 
+	
+	// Getters and setters
+	
 
-	// Getters and setters	
-	
-	
 	public Integer getId_game() {
 		return id_game;
 	}
@@ -155,13 +155,13 @@ public class Game {
 	}
 
 
-	public Integer getNb_gamer() {
-		return nb_gamer;
+	public Integer getNbGamer() {
+		return nbGamer;
 	}
 
 
-	public void setNb_gamer(Integer nb_gamer) {
-		this.nb_gamer = nb_gamer;
+	public void setNbGamer(Integer nbGamer) {
+		this.nbGamer = nbGamer;
 	}
 
 
@@ -212,7 +212,7 @@ public class Game {
 
 	public void setLangages(Set<Langage> langages) {
 		this.langages = langages;
-	}
+	}	
 	
 				
 }

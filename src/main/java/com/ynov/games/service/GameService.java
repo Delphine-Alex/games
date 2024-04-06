@@ -1,5 +1,6 @@
 package com.ynov.games.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,12 @@ public class GameService {
 	@Autowired
 	private GameRepository gameRepository;
 	
-	public Page<Game> getGames(Pageable pageable, String name, Integer minAge, String illustratorName, String creatorName, Integer minPrice, Integer maxPrice) {
-        if (name != null && minAge != null && illustratorName != null && creatorName != null && minPrice != null && maxPrice != null) {
-          return gameRepository.findAllByNameAndAgeGreaterThanEqualAndIllustratorNameAndCreatorNameAndPriceBetween(pageable, name, minAge, illustratorName, creatorName, minPrice, maxPrice);
+	public Page<Game> getGames(Pageable pageable, String name, Integer minAge, String illustratorName, String creatorName, Integer minPrice, Integer maxPrice, List<Integer> nbGamerList) {
+		
+		if (nbGamerList != null) {
+			return gameRepository.findAllByNbGamerIn(pageable, nbGamerList);
+		} else if (name != null && minAge != null && illustratorName != null && creatorName != null && minPrice != null && maxPrice != null) {
+            return gameRepository.findAllByNameAndAgeGreaterThanEqualAndIllustratorNameAndCreatorNameAndPriceBetween(pageable, name, minAge, illustratorName, creatorName, minPrice, maxPrice);
         } else if (illustratorName != null) {
         	return gameRepository.findAllByIllustratorName(pageable, illustratorName);
         } else if (minPrice != null && maxPrice != null) {

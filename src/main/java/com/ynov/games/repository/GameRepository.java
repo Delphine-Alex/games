@@ -1,5 +1,7 @@
 package com.ynov.games.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +17,8 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
 	Page<Game> findAllByName(Pageable pageable, String name);
 	
 	Page<Game> findAllByCreatorName(Pageable pageable, String creatorName);
+	
+    Page<Game> findAllByNbGamerIn(Pageable pageable, List<Integer> nbGamerList);
 	
 	Page<Game> findAllByAgeGreaterThanEqual(Pageable pageable, int minAge);
 	
