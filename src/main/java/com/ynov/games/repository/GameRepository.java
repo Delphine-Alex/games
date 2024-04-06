@@ -19,8 +19,10 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
 	Page<Game> findAllByAgeGreaterThanEqual(Pageable pageable, int minAge);
 	
 	Page<Game> findAllByIllustratorName(Pageable pageable, String illustratorName);
+	
+	Page<Game> findAllByPriceBetween(Pageable pageable, Integer minPrice, Integer maxPrice);
 
-    Page<Game> findAllByNameAndAgeGreaterThanEqualAndIllustratorNameAndCreatorName(Pageable pageable, String name, int minAge, String illustratorName, String creatorName);
+    Page<Game> findAllByNameAndAgeGreaterThanEqualAndIllustratorNameAndCreatorNameAndPriceBetween(Pageable pageable, String name, int minAge, String illustratorName, String creatorName, Integer minPrice, Integer maxPrice);
 
 
 

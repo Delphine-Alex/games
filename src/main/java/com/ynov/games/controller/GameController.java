@@ -38,11 +38,13 @@ public class GameController {
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Integer minAge,
             @RequestParam(required = false) String illustratorName,
-            @RequestParam(required = false) String creatorName
+            @RequestParam(required = false) String creatorName,
+            @RequestParam(required = false) Integer minPrice,
+            @RequestParam(required = false) Integer maxPrice
             
     ) {
         Pageable pageable = PageRequest.of(page, pageSize);
-        Page<Game> gamesPage = gameService.getGames(pageable, name, minAge, illustratorName, creatorName);
+        Page<Game> gamesPage = gameService.getGames(pageable, name, minAge, illustratorName, creatorName, minPrice, maxPrice);
         
         if (gamesPage.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
