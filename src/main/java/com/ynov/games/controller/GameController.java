@@ -35,10 +35,13 @@ public class GameController {
     public ResponseEntity<Page<Game>> getGames(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int pageSize,
-            @RequestParam(required = false) String name
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Integer minAge,
+            @RequestParam(required = false) String illustratorName
+            
     ) {
         Pageable pageable = PageRequest.of(page, pageSize);
-        Page<Game> gamesPage = gameService.getGames(pageable, name);
+        Page<Game> gamesPage = gameService.getGames(pageable, name, minAge, illustratorName);
         
         if (gamesPage.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
