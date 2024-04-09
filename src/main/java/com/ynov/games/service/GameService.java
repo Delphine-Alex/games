@@ -17,11 +17,9 @@ public class GameService {
 	@Autowired
 	private GameRepository gameRepository;
 	
-	public Page<Game> getGames(Pageable pageable, String name, Integer minAge, String illustratorName, String creatorName, Integer minPrice, Integer maxPrice, List<Integer> nbGamerList) {
+	public Page<Game> getGames(Pageable pageable, String name, Integer minAge, String illustratorName, String creatorName, Integer minPrice, Integer maxPrice, List<Integer> nbGamerList, List<String> mechanismsNameList) {
 		
-		if (nbGamerList != null) {
-			return gameRepository.findAllByNbGamerIn(pageable, nbGamerList);
-		} else if (name != null && minAge != null && illustratorName != null && creatorName != null && minPrice != null && maxPrice != null) {
+		if (name != null && minAge != null && illustratorName != null && creatorName != null && minPrice != null && maxPrice != null) {
             return gameRepository.findAllByNameAndAgeGreaterThanEqualAndIllustratorNameAndCreatorNameAndPriceBetween(pageable, name, minAge, illustratorName, creatorName, minPrice, maxPrice);
         } else if (illustratorName != null) {
         	return gameRepository.findAllByIllustratorName(pageable, illustratorName);
@@ -29,6 +27,10 @@ public class GameService {
             return gameRepository.findAllByPriceBetween(pageable, minPrice, maxPrice);
         } else if (minAge != null) {
         	return gameRepository.findAllByAgeGreaterThanEqual(pageable, minAge);
+        } else if (nbGamerList != null) {
+        	return gameRepository.findAllByNbGamerIn(pageable, nbGamerList);
+        } else if (mechanismsNameList != null && !mechanismsNameList.isEmpty()) {
+        	return gameRepository.findAllByMechanisms_NameIn(pageable, mechanismsNameList);
         } else if (creatorName != null) {
         	return gameRepository.findAllByCreatorName(pageable, creatorName);
         } else if (name != null) {

@@ -79,7 +79,7 @@ public class CreatorController {
 	}
 	
 	@DeleteMapping("/creator/{id}")
-	public ResponseEntity<Creator> delateCreator(@PathVariable("id") Integer id) {
+	public ResponseEntity<Creator> deleteCreator(@PathVariable("id") Integer id) {
 	    creatorService.deleteCreator(id);
 	    
 	    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

@@ -42,12 +42,13 @@ public class GameController {
             @RequestParam(required = false) String creatorName,
             @RequestParam(required = false) Integer minPrice,
             @RequestParam(required = false) Integer maxPrice,
-            @RequestParam(required = false) List<Integer> nbGamerList
+            @RequestParam(required = false) List<Integer> nbGamerList,
+            @RequestParam(required = false) List<String> mechanismsNameList
             
     ) {
 		
         Pageable pageable = PageRequest.of(page, pageSize);
-        Page<Game> gamesPage = gameService.getGames(pageable, name, minAge, illustratorName, creatorName, minPrice, maxPrice, nbGamerList);
+        Page<Game> gamesPage = gameService.getGames(pageable, name, minAge, illustratorName, creatorName, minPrice, maxPrice, nbGamerList, mechanismsNameList);
         
         if (gamesPage.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -90,7 +91,7 @@ public class GameController {
 	}
 	
 	@DeleteMapping("/game/{id}")
-	public ResponseEntity<Game> delateGame(@PathVariable("id") Integer id) {
+	public ResponseEntity<Game> deleteGame(@PathVariable("id") Integer id) {
 	    gameService.deleteGame(id);
 	    
 	    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

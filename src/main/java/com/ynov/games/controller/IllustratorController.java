@@ -79,7 +79,7 @@ public class IllustratorController {
 	}
 	
 	@DeleteMapping("/illustrator/{id}")
-	public ResponseEntity<Illustrator> delateIllustrator(@PathVariable("id") Integer id) {
+	public ResponseEntity<Illustrator> deleteIllustrator(@PathVariable("id") Integer id) {
 	    illustratorService.deleteIllustrator(id);
 	    
 	    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
