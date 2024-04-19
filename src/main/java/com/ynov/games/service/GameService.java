@@ -3,6 +3,7 @@ package com.ynov.games.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,9 +16,12 @@ import com.ynov.games.repository.GameRepository;
 public class GameService {
 	
 	@Autowired
+    private RabbitTemplate rabbitTemplate;
+	
+	@Autowired
 	private GameRepository gameRepository;
 	
-	public Page<Game> getGames(Pageable pageable, String name, Integer minAge, String illustratorName, String creatorName, Integer minPrice, Integer maxPrice, List<Integer> nbGamerList, List<String> mechanismsNameList) {
+	public Page<Game> getGames(Pageable pageable, String name, Integer minAge, String illustratorName, String creatorName, Integer minPrice, Integer maxPrice, List<Integer> nbGamerList, List<String> mechanismsName) {
 		
 		if (name != null && minAge != null && illustratorName != null && creatorName != null && minPrice != null && maxPrice != null) {
             return gameRepository.findAllByNameAndAgeGreaterThanEqualAndIllustratorNameAndCreatorNameAndPriceBetween(pageable, name, minAge, illustratorName, creatorName, minPrice, maxPrice);
@@ -29,8 +33,8 @@ public class GameService {
         	return gameRepository.findAllByAgeGreaterThanEqual(pageable, minAge);
         } else if (nbGamerList != null) {
         	return gameRepository.findAllByNbGamerIn(pageable, nbGamerList);
-        } else if (mechanismsNameList != null && !mechanismsNameList.isEmpty()) {
-        	return gameRepository.findAllByMechanisms_NameIn(pageable, mechanismsNameList);
+        } else if (mechanismsName != null && !mechanismsName.isEmpty()) {
+        	return gameRepository.findAllByMechanisms_Name(pageable, mechanismsName);
         } else if (creatorName != null) {
         	return gameRepository.findAllByCreatorName(pageable, creatorName);
         } else if (name != null) {
@@ -45,8 +49,14 @@ public class GameService {
 	}
 	
 	public Game upsert(Game game) {
-		return gameRepository.save(game);
-	}
+		//return gameRepository.save(game);
+		
+        Game updatedGame = gameRepository.save(game);
+        
+        rabbitTemplate.convertAndSend("exchange.games", "game.updated", updatedGame);
+
+        return updatedGame;
+    }
 	
 	public void deleteGame(Integer id){
 		gameRepository.deleteById(id);
