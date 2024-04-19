@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,13 +43,12 @@ public class GameController {
             @RequestParam(required = false) String creatorName,
             @RequestParam(required = false) Integer minPrice,
             @RequestParam(required = false) Integer maxPrice,
-            @RequestParam(required = false) List<Integer> nbGamerList,
-            @RequestParam(required = false) List<String> mechanismsNameList
+            @RequestParam(required = false) List<Integer> nbGamerList
             
     ) {
 		
-        Pageable pageable = PageRequest.of(page, pageSize);
-        Page<Game> gamesPage = gameService.getGames(pageable, name, minAge, illustratorName, creatorName, minPrice, maxPrice, nbGamerList, mechanismsNameList);
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("name").ascending());
+        Page<Game> gamesPage = gameService.getGames(pageable, name, minAge, illustratorName, creatorName, minPrice, maxPrice, nbGamerList);
         
         if (gamesPage.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

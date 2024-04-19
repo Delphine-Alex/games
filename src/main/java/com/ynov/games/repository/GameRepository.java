@@ -16,13 +16,11 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
 	
 	Page<Game> findAllByName(Pageable pageable, String name);
 	
+	Page<Game> findAllByAgeGreaterThanEqual(Pageable pageable, int minAge);
+	
 	Page<Game> findAllByCreatorName(Pageable pageable, String creatorName);
 	
     Page<Game> findAllByNbGamerIn(Pageable pageable, List<Integer> nbGamerList);
-    
-    Page<Game> findAllByMechanisms_NameIn(Pageable pageable, List<String> mechanismsNameList);
-
-	Page<Game> findAllByAgeGreaterThanEqual(Pageable pageable, int minAge);
 	
 	Page<Game> findAllByIllustratorName(Pageable pageable, String illustratorName);
 	
