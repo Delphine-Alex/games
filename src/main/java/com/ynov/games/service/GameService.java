@@ -3,7 +3,6 @@ package com.ynov.games.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,9 +13,6 @@ import com.ynov.games.repository.GameRepository;
 
 @Service
 public class GameService {
-	
-	@Autowired
-    private RabbitTemplate rabbitTemplate;
 	
 	@Autowired
 	private GameRepository gameRepository;
@@ -47,13 +43,7 @@ public class GameService {
 	}
 	
 	public Game upsert(Game game) {
-		//return gameRepository.save(game);
-		
-        Game updatedGame = gameRepository.save(game);
-        
-        rabbitTemplate.convertAndSend("exchange.games", "game.updated", updatedGame);
-
-        return updatedGame;
+		return gameRepository.save(game);
     }
 	
 	public void deleteGame(Integer id){
